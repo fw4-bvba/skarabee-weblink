@@ -75,14 +75,15 @@ final class Client
      *
      * @param int $id The ID of the publication to request
      *
-     * @return PublicationResponse
+     * @return PublicationResponse|null
      */
-    public function getPublication(int $id): PublicationResponse
+    public function getPublication(int $id): ?PublicationResponse
     {
         $request = new Request('GetPublication', [
             'PublicationId' => $id,
         ]);
-        return new PublicationResponse($this->getApiAdapter()->request($request));
+        $response = $this->getApiAdapter()->request($request);
+        return $response ? new PublicationResponse($response) : null;
     }
 
     /**

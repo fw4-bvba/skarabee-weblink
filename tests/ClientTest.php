@@ -65,6 +65,17 @@ class ClientTest extends ApiTestCase
         $this->assertEquals(1, $request['PublicationId']);
     }
 
+    public function testGetPublicationNullResult(): void
+    {
+        $this->queueResponse('{
+            "GetPublicationResult": {}
+        }');
+
+        $result = $this->getClient()->getPublication(1);
+
+        $this->assertNull($result);
+    }
+
     public function testGetProjectSummaries(): void
     {
         $this->queueResponse('{
