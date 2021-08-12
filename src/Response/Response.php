@@ -20,7 +20,7 @@ class Response extends ResponseObject
     {
         $response = [];
         if (!is_array($data)) {
-            $data = reset($data) ?? [];
+            $data = (reset($data) ?? false) ?: [];
         }
         foreach ($data as $value) {
             $response[] = new static($value);
