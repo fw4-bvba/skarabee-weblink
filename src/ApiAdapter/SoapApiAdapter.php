@@ -18,7 +18,6 @@ use PackageVersions\Versions;
  */
 final class SoapApiAdapter extends ApiAdapter
 {
-    private const WSDL_URI = 'http://weblink.skarabee.com/v36/weblink.asmx?WSDL';
     private const DEFAULT_TIMEOUT = 30;
 
     /** @var SoapClient */
@@ -31,7 +30,7 @@ final class SoapApiAdapter extends ApiAdapter
             $soap_client_options['user_agent'] = 'fw4-skarabee-weblink/' . $version;
         }
 
-        $this->client = new \SoapClient(self::WSDL_URI, array_merge([
+        $this->client = new \SoapClient(__DIR__ . DIRECTORY_SEPARATOR . 'weblink.asmx.xml', array_merge([
             'soap_version' => SOAP_1_2,
             'exceptions' => false,
             'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
