@@ -25,7 +25,8 @@ class ResponseObject implements \JsonSerializable
         foreach ($arrays as $array) {
             if (is_string($array)) {
                 if (isset($data->$array)) {
-                    $value = reset($data->$array);
+                    $value = (array)$data->$array;
+                    $value = reset($value);
                     $data->$array = $value ? $value : [];
                 } else {
                     $data->$array = [];
@@ -126,6 +127,7 @@ class ResponseObject implements \JsonSerializable
 
     /* JsonSerializable implementation */
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getData();

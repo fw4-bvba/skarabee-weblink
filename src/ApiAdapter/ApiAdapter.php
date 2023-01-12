@@ -63,6 +63,7 @@ abstract class ApiAdapter
 
         unset($response->Errors);
 
+        $response = (array)$response;
         $response = reset($response);
         return is_object($response) ? $response : null;
     }
