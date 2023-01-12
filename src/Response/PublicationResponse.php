@@ -34,6 +34,7 @@ class PublicationResponse extends Response
                 'TypesOfGarden',
                 'GarageFacilities',
                 'Levels',
+                'PartnerUrls',
                 'MarketingTypes' => [
                     'Descriptions'
                 ],
