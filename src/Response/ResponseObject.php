@@ -10,8 +10,9 @@
 namespace Skarabee\Weblink\Response;
 
 use Skarabee\Weblink\Exception\InvalidPropertyException;
+use JsonSerializable;
 
-class ResponseObject implements \JsonSerializable
+class ResponseObject implements JsonSerializable, ResponseObjectInterface
 {
     /** @var array */
     protected $_data = [];

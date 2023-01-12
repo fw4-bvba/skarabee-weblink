@@ -9,12 +9,7 @@
 
 namespace Skarabee\Weblink\Response;
 
-class ProjectSummaryResponse extends Response
+interface ResponseObjectInterface
 {
-    public function __construct($data, array $arrays = [])
-    {
-        parent::__construct($data, array_merge([
-            'PropertySummaries',
-        ], $arrays));
-    }
+    public function __construct(object $data, array $arrays);
 }
