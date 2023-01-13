@@ -11,8 +11,12 @@ namespace Skarabee\Weblink\Exception;
 
 class InvalidContactMeException extends Exception
 {
+    /** @var array<int, array<string, mixed>> */
     protected $contacts;
 
+    /**
+     * @param array<int, array<string, mixed>> $contacts Array of contact errors
+     */
     public function __construct(array $contacts)
     {
         $this->contacts = $contacts;
@@ -28,6 +32,7 @@ class InvalidContactMeException extends Exception
         }, $errors)) . '.');
     }
 
+    /** @return array<int, array<string, mixed>> */
     public function getContacts(): array
     {
         return $this->contacts;

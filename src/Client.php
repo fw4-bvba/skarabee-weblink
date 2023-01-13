@@ -11,7 +11,6 @@ namespace Skarabee\Weblink;
 
 use Skarabee\Weblink\ApiAdapter\ApiAdapter;
 use Skarabee\Weblink\ApiAdapter\SoapApiAdapter;
-use Skarabee\Weblink\Response\Response;
 use Skarabee\Weblink\Response\PublicationResponse;
 use Skarabee\Weblink\Response\PublicationSummaryResponse;
 use Skarabee\Weblink\Response\ProjectSummaryResponse;
@@ -22,12 +21,18 @@ use DateTime;
 
 final class Client
 {
-    /** @var ApiAdapter */
+    /** @var ?ApiAdapter */
     private $apiAdapter;
 
-    /** @var array */
+    /** @var array<string, mixed> */
     private $soapClientOptions;
 
+    /**
+     * @param string $username
+     * @param string $password
+     * @param array<string, mixed> $soap_client_options Optional SOAP client
+     * options
+     */
     public function __construct(string $username, string $password, array $soap_client_options = [])
     {
         $this->soapClientOptions = array_merge([
@@ -44,16 +49,19 @@ final class Client
      * @param DateTime|null $modified_since Filter the list for publications
      * that have been created or modified since a specific date
      *
-     * @param array|null $types Filter the list for publications of a specific
-     * type of property
+     * @param string[]|null $types Filter the list for publications of a
+     * specific type of property
      *
      * @param bool|null $exclude_shared_properties Exclude publications that
      * have been shared by other agencies
      *
-     * @return array
+     * @return PublicationSummaryResponse[]
      */
-    public function getPublicationSummaries(?DateTime $modified_since = null, ?array $types = null, ?bool $exclude_shared_properties = null): array
-    {
+    public function getPublicationSummaries(
+        ?DateTime $modified_since = null,
+        ?array $types = null,
+        ?bool $exclude_shared_properties = null
+    ): array {
         $parameters = [];
 
         if (!is_null($modified_since)) {
@@ -95,7 +103,7 @@ final class Client
      * @param bool|null $exclude_shared_properties Exclude publications that
      * have been shared by other agencies
      *
-     * @return array
+     * @return ProjectSummaryResponse[]
      */
     public function getProjectSummaries(
         ?DateTime $modified_since = null,
@@ -117,7 +125,7 @@ final class Client
     /**
      * Get the contact info of the current agent.
      *
-     * @return ContactInfoResponse
+     * @return ContactInfoResponse[]
      */
     public function getContactInfo(): array
     {
@@ -128,7 +136,7 @@ final class Client
     /**
      * Get a list of the current agent's users.
      *
-     * @return array
+     * @return LoginResponse[]
      */
     public function getLogins(): array
     {
@@ -139,7 +147,8 @@ final class Client
     /**
      * Send contact form input to Skarabee.
      *
-     * @param array $input Either an associative array containing the contact
+     * @param array<string, mixed>|array<array<string, mixed>> $input Either an
+     * associative array containing the contact
      * data, or an array of associative arrays containing data for multiple
      * contact requests
      */
@@ -167,7 +176,8 @@ final class Client
     /**
      * Inform Skarabee about the status of a publication.
      *
-     * @param array $input Either an associative array containing feedback about
+     * @param array<string, mixed>|array<array<string, mixed>> $input Either an
+     * associative array containing feedback about
      * a single publication, or an array of associative arrays containing
      * feedback for multiple publications
      */
@@ -205,6 +215,9 @@ final class Client
 
     // Api adapter
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getSoapClientOptions(): array
     {
         return $this->soapClientOptions;
@@ -218,8 +231,8 @@ final class Client
 
     public function getApiAdapter(): ApiAdapter
     {
-        if (!isset($this->apiAdapter)) {
-            $this->setApiAdapter(new SoapApiAdapter($this->getSoapClientOptions()));
+        if (is_null($this->apiAdapter)) {
+            $this->apiAdapter = new SoapApiAdapter($this->getSoapClientOptions());
         }
         return $this->apiAdapter;
     }

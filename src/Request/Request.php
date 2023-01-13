@@ -16,9 +16,14 @@ class Request
     /** @var string */
     protected $function;
 
-    /** @var array */
+    /** @var array<string, mixed> */
     protected $parameters;
 
+    /**
+     * @param string $function SOAP function to call
+     * @param array<string, mixed> $parameters Associative array of SOAP
+     * parameters
+     */
     public function __construct(string $function, array $parameters = [])
     {
         $this->setFunction($function);
@@ -51,7 +56,8 @@ class Request
     /**
      * Set the SOAP parameters.
      *
-     * @param array $parameters Associative array of parameter names and values
+     * @param array<string, mixed> $parameters Associative array of parameter
+     * names and values
      *
      * @return self
      */
@@ -64,7 +70,8 @@ class Request
     /**
      * Get the SOAP parameters.
      *
-     * @return array Associative array of parameter names and values
+     * @return array<string, mixed> Associative array of parameter names and
+     * values
      */
     public function getParameters(): array
     {
@@ -76,7 +83,7 @@ class Request
      *
      * @param mixed $encodable
      *
-     * @return self
+     * @return mixed
      */
     protected function encode($encodable)
     {

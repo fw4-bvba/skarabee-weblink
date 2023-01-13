@@ -12,7 +12,7 @@ namespace Skarabee\Weblink\Enums;
 abstract class Enum
 {
     /**
-     * @var array
+     * @var array<string, array<string, mixed>>
      */
     protected static $constants = [];
 
@@ -23,7 +23,8 @@ abstract class Enum
     /**
      * Get all possible values for this enum
      *
-     * @return array Associative array with constant name as key and its value
+     * @return array<string, mixed> Associative array with constant name as key
+     * and its value
      */
     public static function all(): array
     {

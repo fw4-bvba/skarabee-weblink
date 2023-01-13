@@ -12,6 +12,7 @@ namespace Skarabee\Weblink\ApiAdapter;
 use Skarabee\Weblink\Request\Request;
 use Skarabee\Weblink\Exception;
 use PackageVersions\Versions;
+use SoapClient;
 
 /**
  * @codeCoverageIgnore
@@ -23,6 +24,10 @@ final class SoapApiAdapter extends ApiAdapter
     /** @var SoapClient */
     private $client;
 
+    /**
+     * @param array<string, mixed> $soap_client_options Additional options to
+     * set for the SoapClient.
+     */
     public function __construct(array $soap_client_options = [])
     {
         if (empty($soap_client_options['user_agent'])) {
@@ -30,7 +35,7 @@ final class SoapApiAdapter extends ApiAdapter
             $soap_client_options['user_agent'] = 'fw4-skarabee-weblink/' . $version;
         }
 
-        $this->client = new \SoapClient(__DIR__ . DIRECTORY_SEPARATOR . 'weblink.asmx.xml', array_merge([
+        $this->client = new SoapClient(__DIR__ . DIRECTORY_SEPARATOR . 'weblink.asmx.xml', array_merge([
             'soap_version' => SOAP_1_2,
             'exceptions' => false,
             'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
@@ -79,7 +84,7 @@ final class SoapApiAdapter extends ApiAdapter
      *
      * @param string $value
      *
-     * @return null|float
+     * @return ?float
      */
     public function parseDecimal(string $value): ?float
     {
@@ -97,14 +102,19 @@ final class SoapApiAdapter extends ApiAdapter
      *
      * @param string $value
      *
-     * @return object
+     * @return ?object
      */
-    public function parseCoordinate(string $value): object
+    public function parseCoordinate(string $value): ?object
     {
         $xml = simplexml_load_string($value);
+        if (!$xml) {
+            return null;
+        }
+
         $value = (object)((array)$xml->attributes())['@attributes'];
         $value->X = empty($value->X) ? null : floatval(str_replace(',', '.', $value->X));
         $value->Y = empty($value->Y) ? null : floatval(str_replace(',', '.', $value->Y));
+
         return $value;
     }
 
