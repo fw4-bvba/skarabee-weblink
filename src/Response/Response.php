@@ -20,6 +20,7 @@ class Response extends ResponseObject
     {
         $response = [];
         if (!is_array($data)) {
+            $data = (array)$data;
             $data = (reset($data) ?? false) ?: [];
         }
         foreach ($data as $value) {

@@ -10,8 +10,9 @@
 namespace Skarabee\Weblink\Response;
 
 use Skarabee\Weblink\Exception\InvalidPropertyException;
+use JsonSerializable;
 
-class ResponseObject implements \JsonSerializable
+class ResponseObject implements JsonSerializable, ResponseObjectInterface
 {
     /** @var array */
     protected $_data = [];
@@ -25,7 +26,8 @@ class ResponseObject implements \JsonSerializable
         foreach ($arrays as $array) {
             if (is_string($array)) {
                 if (isset($data->$array)) {
-                    $value = reset($data->$array);
+                    $value = (array)$data->$array;
+                    $value = reset($value);
                     $data->$array = $value ? $value : [];
                 } else {
                     $data->$array = [];
@@ -126,6 +128,7 @@ class ResponseObject implements \JsonSerializable
 
     /* JsonSerializable implementation */
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getData();
