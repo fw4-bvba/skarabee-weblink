@@ -23,7 +23,7 @@ class InvalidContactMeException extends Exception
 
         $message = 'InsertContactMes resulted in ' . count($errors) . ' issues with ' . count($contacts) . ' contact' . (count($contacts) === 1 ? '' : 's');
 
-        parent::__construct($message . ': ' . implode('. ', array_map(function($a) {
+        parent::__construct($message . ': ' . implode('. ', array_map(function ($a) {
             return rtrim($a, '.');
         }, $errors)) . '.');
     }

@@ -18,7 +18,7 @@ abstract class ApiTestCase extends TestCase
     protected static $adapter;
     protected static $client;
 
-    static public function setUpBeforeClass(): void
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 

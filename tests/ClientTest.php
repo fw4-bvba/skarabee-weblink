@@ -253,7 +253,7 @@ class ClientTest extends ApiTestCase
         $client = new Client('foo', 'bar');
 
         $called = false;
-        $this->getClient()->debugResponses(function($function, $request, $response) use (&$called) {
+        $this->getClient()->debugResponses(function ($function, $request, $response) use (&$called) {
             $called = true;
 
             $this->assertEquals('GetPublication', $function);

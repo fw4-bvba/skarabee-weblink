@@ -19,7 +19,8 @@ class Request
     /** @var array */
     protected $parameters;
 
-    public function __construct(string $function, array $parameters = []) {
+    public function __construct(string $function, array $parameters = [])
+    {
         $this->setFunction($function);
         $this->setParameters($parameters);
     }

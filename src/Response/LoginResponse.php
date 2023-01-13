@@ -10,4 +10,5 @@
 namespace Skarabee\Weblink\Response;
 
 class LoginResponse extends Response
-{}
+{
+}

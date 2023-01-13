@@ -50,7 +50,8 @@ abstract class ApiAdapter
         // Check for response data
         $result_container = $request->getFunction() . 'Result';
         if (!property_exists($response, $result_container)) {
-            throw new Exception\WeblinkException('Response from Skarabee Weblink is missing data. Expected "' . $result_container . '".');
+            $message = 'Response from Skarabee Weblink is missing data. Expected "' . $result_container . '".';
+            throw new Exception\WeblinkException($message);
         }
         $response = $response->$result_container;
 

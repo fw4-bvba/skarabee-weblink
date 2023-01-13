@@ -97,8 +97,10 @@ final class Client
      *
      * @return array
      */
-    public function getProjectSummaries(?DateTime $modified_since = null, ?bool $exclude_shared_properties = null): array
-    {
+    public function getProjectSummaries(
+        ?DateTime $modified_since = null,
+        ?bool $exclude_shared_properties = null
+    ): array {
         $parameters = [];
 
         if (!is_null($modified_since)) {
