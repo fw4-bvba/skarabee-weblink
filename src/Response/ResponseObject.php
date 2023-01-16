@@ -14,10 +14,10 @@ use JsonSerializable;
 
 class ResponseObject implements JsonSerializable, ResponseObjectInterface
 {
-    /** @var array */
+    /** @var array<mixed> */
     protected $_data = [];
 
-    /** @var array */
+    /** @var array<string, mixed> */
     private $_propertyIndex = [];
 
     public function __construct(object $data, array $arrays = [])
@@ -47,9 +47,14 @@ class ResponseObject implements JsonSerializable, ResponseObjectInterface
      * Recursively parse response data.
      *
      * @param mixed $value
-     * @param string|null $property Name of the property to parse
+     * @param array<mixed> $arrays Array indicating which properties should be
+     * converted to arrays. If the array value is a string, it is interpreted as
+     * the name of a property to convert to an array. If the value is an array
+     * with a string as key, the key is interpreted as the name of a property
+     * containing an object, while the array value indicates which properties of
+     * said object should be converted to an array. This applies recursively.
      *
-     * @return self
+     * @return mixed
      */
     protected function parseValue($value, array $arrays)
     {
@@ -77,20 +82,29 @@ class ResponseObject implements JsonSerializable, ResponseObjectInterface
     /**
      * Get all properties of this object.
      *
-     * @return array
+     * @return array<mixed>
      */
     public function getData(): array
     {
         return $this->_data;
     }
 
+    /**
+     * @param string $property
+     *
+     * @return mixed
+     */
     public function __get(string $property)
     {
         $property = $this->normalizePropertyName($property);
         return $this->_data[$property] ?? null;
     }
 
-    public function __set(string $property, $value)
+    /**
+     * @param string $property
+     * @param mixed $value
+     */
+    public function __set(string $property, $value): void
     {
         $this->_propertyIndex[strtolower($property)] = $property;
         $this->_data[$property] = $value;
@@ -102,7 +116,7 @@ class ResponseObject implements JsonSerializable, ResponseObjectInterface
         return isset($this->_propertyIndex[$index]);
     }
 
-    public function __unset(string $property)
+    public function __unset(string $property): void
     {
         $property = $this->normalizePropertyName($property);
         unset($this->_data[$property]);
@@ -111,8 +125,10 @@ class ResponseObject implements JsonSerializable, ResponseObjectInterface
 
     /**
      * @codeCoverageIgnore
+     *
+     * @return array<mixed>
      */
-    public function __debugInfo()
+    public function __debugInfo(): array
     {
         return $this->getData();
     }

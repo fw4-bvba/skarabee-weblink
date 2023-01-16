@@ -40,7 +40,7 @@ class ClientTest extends ApiTestCase
         $this->assertEquals(2, $result[1]->id);
 
         $request = $this->getLastRequestParameters();
-        $this->assertIsString($request['LastModified']);
+        $this->assertIsString($request['LastModified'] ?? null);
         $this->assertEquals(['LOT', 'MODEL'], $request['RequestedPropertyTypes']);
         $this->assertEquals(true, $request['ExcludeSharedProperties']);
     }
@@ -58,11 +58,11 @@ class ClientTest extends ApiTestCase
 
         $result = $this->getClient()->getPublication(1);
 
-        $this->assertEquals(1, $result->info->id);
-        $this->assertEquals(2, $result->property->id);
+        $this->assertEquals(1, $result->info->id ?? null);
+        $this->assertEquals(2, $result->property->id ?? null);
 
         $request = $this->getLastRequestParameters();
-        $this->assertEquals(1, $request['PublicationId']);
+        $this->assertEquals(1, $request['PublicationId'] ?? null);
     }
 
     public function testGetPublicationNullResult(): void
@@ -96,8 +96,8 @@ class ClientTest extends ApiTestCase
         $this->assertEquals(2, $result[1]->id);
 
         $request = $this->getLastRequestParameters();
-        $this->assertIsString($request['LastModified']);
-        $this->assertEquals(true, $request['ExcludeSharedProperties']);
+        $this->assertIsString($request['LastModified'] ?? null);
+        $this->assertEquals(true, $request['ExcludeSharedProperties'] ?? null);
     }
 
     public function testGetContactInfo(): void
@@ -150,14 +150,12 @@ class ClientTest extends ApiTestCase
             }
         }');
 
-        $result = $this->getClient()->insertContactMes([
+        $this->getClient()->insertContactMes([
             'ExternalReference' => 'foo'
         ]);
 
-        $this->assertNull($result);
-
         $request = $this->getLastRequestParameters();
-        $this->assertEquals('foo', $request[0]['ExternalReference']);
+        $this->assertEquals('foo', $request[0]['ExternalReference'] ?? null);
     }
 
     public function testInsertContactMesMultiple(): void
@@ -170,16 +168,14 @@ class ClientTest extends ApiTestCase
             }
         }');
 
-        $result = $this->getClient()->insertContactMes([
+        $this->getClient()->insertContactMes([
             ['ExternalReference' => 'foo'],
             ['ExternalReference' => 'bar'],
         ]);
 
-        $this->assertNull($result);
-
         $request = $this->getLastRequestParameters();
-        $this->assertEquals('foo', $request[0]['ExternalReference']);
-        $this->assertEquals('bar', $request[1]['ExternalReference']);
+        $this->assertEquals('foo', $request[0]['ExternalReference'] ?? null);
+        $this->assertEquals('bar', $request[1]['ExternalReference'] ?? null);
     }
 
     public function testInsertContactMesInvalid(): void
@@ -202,7 +198,7 @@ class ClientTest extends ApiTestCase
         $this->expectException(InvalidContactMeException::class);
         $this->expectExceptionMessage('InsertContactMes resulted in 2 issues with 1 contact: bar. baz.');
 
-        $result = $this->getClient()->insertContactMes([
+        $this->getClient()->insertContactMes([
             'ExternalReference' => 'foo'
         ]);
     }
@@ -213,14 +209,12 @@ class ClientTest extends ApiTestCase
             "FeedbackResult": {}
         }');
 
-        $result = $this->getClient()->feedback([
+        $this->getClient()->feedback([
             'ExternalID' => 'foo'
         ]);
 
-        $this->assertNull($result);
-
         $request = $this->getLastRequestParameters();
-        $this->assertEquals('foo', $request['FeedbackList']['FeedbackList'][0]['ExternalID']);
+        $this->assertEquals('foo', $request['FeedbackList']['FeedbackList'][0]['ExternalID'] ?? null);
     }
 
     public function testGetSoapClientOptions(): void
@@ -253,7 +247,7 @@ class ClientTest extends ApiTestCase
         $client = new Client('foo', 'bar');
 
         $called = false;
-        $this->getClient()->debugResponses(function($function, $request, $response) use (&$called) {
+        $this->getClient()->debugResponses(function ($function, $request, $response) use (&$called) {
             $called = true;
 
             $this->assertEquals('GetPublication', $function);

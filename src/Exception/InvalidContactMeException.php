@@ -11,23 +11,33 @@ namespace Skarabee\Weblink\Exception;
 
 class InvalidContactMeException extends Exception
 {
+    /** @var array<int, array<string, mixed>> */
     protected $contacts;
 
+    /**
+     * @param array<int, array<string, mixed>> $contacts Array of contact errors
+     */
     public function __construct(array $contacts)
     {
         $this->contacts = $contacts;
 
         $errors = array_reduce($contacts, function ($carry, $item) {
-            return array_merge($carry, $item['errors'] ?? []);
+            if (isset($item['errors']) && is_array($item['errors'])) {
+                $errors = $item['errors'];
+            } else {
+                $errors = [];
+            }
+            return array_merge($carry, $errors);
         }, []);
 
         $message = 'InsertContactMes resulted in ' . count($errors) . ' issues with ' . count($contacts) . ' contact' . (count($contacts) === 1 ? '' : 's');
 
-        parent::__construct($message . ': ' . implode('. ', array_map(function($a) {
+        parent::__construct($message . ': ' . implode('. ', array_map(function ($a) {
             return rtrim($a, '.');
         }, $errors)) . '.');
     }
 
+    /** @return array<int, array<string, mixed>> */
     public function getContacts(): array
     {
         return $this->contacts;

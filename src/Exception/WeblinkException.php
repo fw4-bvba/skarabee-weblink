@@ -10,4 +10,5 @@
 namespace Skarabee\Weblink\Exception;
 
 class WeblinkException extends Exception
-{}
+{
+}
