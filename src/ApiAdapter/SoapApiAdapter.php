@@ -74,6 +74,8 @@ final class SoapApiAdapter extends ApiAdapter
                 throw new Exception\AuthException($response->getMessage());
             }
             throw new Exception\WeblinkException($response->getMessage());
+        } elseif (!is_object($response) && !is_null($response)) {
+            throw new Exception\WeblinkException('Unexpected response from Skarabee Weblink. Expected object, got ' . gettype($response) . ' instead.');
         }
 
         return $response;

@@ -22,7 +22,12 @@ class InvalidContactMeException extends Exception
         $this->contacts = $contacts;
 
         $errors = array_reduce($contacts, function ($carry, $item) {
-            return array_merge($carry, $item['errors'] ?? []);
+            if (isset($item['errors']) && is_array($item['errors'])) {
+                $errors = $item['errors'];
+            } else {
+                $errors = [];
+            }
+            return array_merge($carry, $errors);
         }, []);
 
         $message = 'InsertContactMes resulted in ' . count($errors) . ' issues with ' . count($contacts) . ' contact' . (count($contacts) === 1 ? '' : 's');
