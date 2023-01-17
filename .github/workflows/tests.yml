@@ -1,0 +1,93 @@
+name: "Tests"
+
+on: [push, pull_request]
+
+jobs:
+    phpunit:
+        runs-on: ${{ matrix.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ubuntu-latest]
+                php: [7.4, 8.0, 8.1]
+                dependency-version: [prefer-lowest, prefer-stable]
+
+        name: PHPUnit ${{ matrix.php }} - ${{ matrix.dependency-version }}
+
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v3
+
+            -   name: Cache dependencies
+                uses: actions/cache@v3
+                with:
+                    path: ~/.composer/cache/files
+                    key: php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: mbstring, dom, curl, libxml, zip, pcntl, intl, exif, iconv
+                    coverage: none
+
+            -   name: Install dependencies
+                run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress
+
+            -   name: Execute tests
+                run: vendor/bin/phpunit
+    phpcs:
+        runs-on: ubuntu-latest
+
+        name: PHP CodeSniffer
+
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v3
+
+            -   name: Cache dependencies
+                uses: actions/cache@v3
+                with:
+                    path: ~/.composer/cache/files
+                    key: php-8.1-composer-${{ hashFiles('composer.json') }}
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    extensions: mbstring, dom, curl, libxml, zip, pcntl, intl, exif, iconv
+                    coverage: none
+
+            -   name: Install dependencies
+                run: composer update --prefer-stable --prefer-dist --no-interaction --no-progress
+
+            -   name: Execute PHPCS
+                run: vendor/bin/phpcs
+
+    phpstan:
+        runs-on: ubuntu-latest
+
+        name: PHPStan
+
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v3
+
+            -   name: Cache dependencies
+                uses: actions/cache@v3
+                with:
+                    path: ~/.composer/cache/files
+                    key: php-8.1-composer-${{ hashFiles('composer.json') }}
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    extensions: mbstring, dom, curl, libxml, zip, pcntl, intl, exif, iconv
+                    coverage: none
+
+            -   name: Install dependencies
+                run: composer update --prefer-stable --prefer-dist --no-interaction --no-progress
+
+            -   name: Execute PHPStan
+                run: vendor/bin/phpstan
