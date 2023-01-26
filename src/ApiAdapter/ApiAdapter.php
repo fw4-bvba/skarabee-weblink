@@ -10,6 +10,7 @@
 namespace Skarabee\Weblink\ApiAdapter;
 
 use Skarabee\Weblink\Request\Request;
+use Skarabee\Weblink\Response\ResponseObject;
 use Skarabee\Weblink\Exception;
 
 abstract class ApiAdapter
@@ -62,8 +63,7 @@ abstract class ApiAdapter
 
         unset($response->Errors);
 
-        $response = (array)$response;
-        $response = reset($response);
+        $response = ResponseObject::getFirstPropertyOfObject($response);
         return is_object($response) ? $response : null;
     }
 

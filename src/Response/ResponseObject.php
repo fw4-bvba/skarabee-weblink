@@ -9,6 +9,7 @@
 
 namespace Skarabee\Weblink\Response;
 
+use ArrayIterator;
 use Skarabee\Weblink\Exception\InvalidPropertyException;
 use JsonSerializable;
 
@@ -26,9 +27,7 @@ class ResponseObject implements JsonSerializable, ResponseObjectInterface
         foreach ($arrays as $array) {
             if (is_string($array)) {
                 if (isset($data->$array)) {
-                    $value = (array)$data->$array;
-                    $value = reset($value);
-                    $data->$array = $value ? $value : [];
+                    $data->$array = self::getFirstPropertyOfObject($data->$array) ?: [];
                 } else {
                     $data->$array = [];
                 }
@@ -140,6 +139,17 @@ class ResponseObject implements JsonSerializable, ResponseObjectInterface
             throw new InvalidPropertyException($property . ' is not a valid property of ' . static::class);
         }
         return $this->_propertyIndex[$index];
+    }
+
+    /**
+     * Returns the first property of an object, if it exists
+     *
+     * @return mixed
+     */
+    public static function getFirstPropertyOfObject(object $object)
+    {
+        $iterator = new ArrayIterator((array)$object);
+        return $iterator->current();
     }
 
     /* JsonSerializable implementation */
