@@ -22,8 +22,7 @@ class Response extends ResponseObject
     {
         $response = [];
         if (!is_array($data)) {
-            $data = (array)$data;
-            $data = (reset($data) ?? false) ?: [];
+            $data = (self::getFirstPropertyOfObject($data) ?? false) ?: [];
         }
         foreach ($data as $value) {
             $response[] = new static($value);
