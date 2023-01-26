@@ -10,4 +10,5 @@
 namespace Skarabee\Weblink\Response;
 
 class ContactInfoResponse extends Response
-{}
+{
+}

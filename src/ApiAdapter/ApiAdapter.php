@@ -15,10 +15,10 @@ use Skarabee\Weblink\Exception;
 
 abstract class ApiAdapter
 {
-    /** @var callable */
+    /** @var ?callable */
     protected $debugCallable;
 
-    /** @var Request */
+    /** @var ?Request */
     protected $lastRequest;
 
     /**
@@ -48,8 +48,9 @@ abstract class ApiAdapter
 
         // Check for response data
         $result_container = $request->getFunction() . 'Result';
-        if (!property_exists($response, $result_container)) {
-            throw new Exception\WeblinkException('Response from Skarabee Weblink is missing data. Expected "' . $result_container . '".');
+        if (!$response || !property_exists($response, $result_container)) {
+            $message = 'Response from Skarabee Weblink is missing data. Expected "' . $result_container . '".';
+            throw new Exception\WeblinkException($message);
         }
         $response = $response->$result_container;
 
@@ -71,7 +72,7 @@ abstract class ApiAdapter
      *
      * @param Request $request
      *
-     * @return object
+     * @return ?object
      */
     abstract public function executeRequest(Request $request): ?object;
 
@@ -96,7 +97,7 @@ abstract class ApiAdapter
      * Implement getAdditionalDebugCallbackArguments in a child class to add
      * extra arguments to the debug callback call.
      *
-     * @return array
+     * @return array<int, mixed>
      */
     protected function getAdditionalDebugCallbackArguments(): array
     {

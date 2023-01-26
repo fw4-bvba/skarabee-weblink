@@ -14,7 +14,7 @@ use Skarabee\Weblink\Request\Request;
 
 final class TestApiAdapter extends ApiAdapter
 {
-    /** @var array */
+    /** @var array<int, object> */
     protected $responseQueue = [];
 
     public function clearQueue(): void

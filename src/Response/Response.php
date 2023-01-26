@@ -15,6 +15,8 @@ class Response extends ResponseObject
      * Parse data as an array of instances of this response class.
      *
      * @param mixed $data
+     *
+     * @return array<static>
      */
     public static function collection($data): array
     {
