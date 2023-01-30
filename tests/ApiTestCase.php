@@ -9,16 +9,19 @@
 
 namespace Skarabee\Weblink\Tests;
 
+use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Skarabee\Weblink\Client;
-use Skarabee\Weblink\Request\Request;
 
 abstract class ApiTestCase extends TestCase
 {
+    /** @var TestApiAdapter */
     protected static $adapter;
+
+    /** @var Client */
     protected static $client;
 
-    static public function setUpBeforeClass(): void
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
@@ -35,14 +38,20 @@ abstract class ApiTestCase extends TestCase
         self::$adapter->debugResponses(null);
     }
 
+    /**
+     * @param string|JsonSerializable $body
+     */
     public function queueResponse($body): void
     {
         if (!is_string($body)) {
-            $body = json_encode($body);
+            $body = json_encode($body) ?: '{}';
         }
         self::$adapter->queueResponse($body);
     }
 
+    /**
+     * @return array<mixed>|null
+     */
     public function getLastRequestParameters(): ?array
     {
         $request = self::$adapter->getLastRequest();

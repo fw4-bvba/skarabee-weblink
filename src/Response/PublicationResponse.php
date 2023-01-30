@@ -11,9 +11,9 @@ namespace Skarabee\Weblink\Response;
 
 class PublicationResponse extends Response
 {
-    public function __construct($data)
+    public function __construct($data, array $arrays = [])
     {
-        parent::__construct($data, [
+        parent::__construct($data, array_merge([
             'Info' => [
                 'Options',
             ],
@@ -34,6 +34,7 @@ class PublicationResponse extends Response
                 'TypesOfGarden',
                 'GarageFacilities',
                 'Levels',
+                'PartnerUrls',
                 'MarketingTypes' => [
                     'Descriptions'
                 ],
@@ -56,7 +57,7 @@ class PublicationResponse extends Response
             'Pictures',
             'Documents',
             'FloorPlans',
-        ]);
+        ], $arrays));
 
         // Parse SurfaceStock
         if (isset($this->Property->SurfaceStock)) {

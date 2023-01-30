@@ -15,12 +15,14 @@ class Response extends ResponseObject
      * Parse data as an array of instances of this response class.
      *
      * @param mixed $data
+     *
+     * @return array<static>
      */
     public static function collection($data): array
     {
         $response = [];
         if (!is_array($data)) {
-            $data = (reset($data) ?? false) ?: [];
+            $data = (self::getFirstPropertyOfObject($data) ?? false) ?: [];
         }
         foreach ($data as $value) {
             $response[] = new static($value);

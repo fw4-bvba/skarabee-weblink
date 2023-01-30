@@ -11,10 +11,10 @@ namespace Skarabee\Weblink\Response;
 
 class ProjectSummaryResponse extends Response
 {
-    public function __construct($data)
+    public function __construct($data, array $arrays = [])
     {
-        parent::__construct($data, [
+        parent::__construct($data, array_merge([
             'PropertySummaries',
-        ]);
+        ], $arrays));
     }
 }
