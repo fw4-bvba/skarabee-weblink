@@ -41,6 +41,7 @@ final class SoapApiAdapter extends ApiAdapter
             'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
             'connection_timeout' => self::DEFAULT_TIMEOUT,
             'trace' => true,
+            'cache_wsdl' => WSDL_CACHE_NONE,
             'typemap' => [
                 [
                     'type_ns' => 'http://www.w3.org/2001/XMLSchema',
