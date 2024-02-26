@@ -480,6 +480,52 @@
           <s:element minOccurs="1" maxOccurs="1" name="OfficeId" nillable="true" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="WaterPolicyPScore" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="WaterPolicyGScore" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomDescriptions" type="tns:ArrayOfCustomDescription" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasAntenna" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="AntennaComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasArmoredDoor" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ArmoredDoorComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasDisabledAccess" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisabledAccessComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasDomotica" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DomoticaComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasSauna" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SaunaComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasSteamCabin" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="SteamCabinComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasVideoPhone" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="VideoPhoneComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToHighway" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyRailwayStation" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToRailwayStation" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyRailwayStop" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToRailwayStop" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyBusNode" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToBusNode" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyMetroNode" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToMetroNode" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyTramNode" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToTramNode" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyBusStop" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToBusStop" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyMetroStop" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToMetroStop" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyTramStop" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToTramStop" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyBank" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToBank" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyRecreation" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToRecreation" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyRestaurant" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToRestaurant" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToShops" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToSchool" type="tns:DistanceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="NearbyDaycare" type="tns:ThreeStateType" />
+          <s:element minOccurs="1" maxOccurs="1" name="DistanceToDaycare" type="tns:DistanceType" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomValuesLanguageIndependent" type="tns:ArrayOfCustomFiedValue" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomValuesLanguageDependent" type="tns:ArrayOfCustomFiedValue" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceGarage" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RenovationDuty" type="tns:ThreeStateType" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Project">
@@ -506,6 +552,10 @@
           <s:element minOccurs="1" maxOccurs="1" name="ReducedVAT" type="tns:ThreeStateType" />
           <s:element minOccurs="1" maxOccurs="1" name="Investment" type="tns:ThreeStateType" />
           <s:element minOccurs="0" maxOccurs="1" name="BuildingCompany" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentMax" type="tns:Dimension" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentMin" type="tns:Dimension" />
+          <s:element minOccurs="0" maxOccurs="1" name="HabitableAreaMax" type="tns:Dimension" />
+          <s:element minOccurs="0" maxOccurs="1" name="HabitableAreaMin" type="tns:Dimension" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Dimension">
@@ -2701,6 +2751,45 @@
           <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfCustomDescription">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomDescription" nillable="true" type="tns:CustomDescription" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomDescription">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DistanceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="UNDEFINED" />
+          <s:enumeration value="LESS_THAN_500M" />
+          <s:enumeration value="BETWEEN_500M_1000M" />
+          <s:enumeration value="BETWEEN_1000M_1500M" />
+          <s:enumeration value="BETWEEN_1500M_2000M" />
+          <s:enumeration value="BETWEEN_2KM_3KM" />
+          <s:enumeration value="BETWEEN_3KM_4KM" />
+          <s:enumeration value="BETWEEN_4KM_5KM" />
+          <s:enumeration value="MORE_THAN_5KM" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfCustomFiedValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomFieldValue" nillable="true" type="tns:CustomFiedValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomFiedValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomFieldCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Language" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ArrayOfDocument">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
@@ -2751,6 +2840,7 @@
       <s:complexType name="GenericEstate">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="EstateId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="tns:Address" />
         </s:sequence>
       </s:complexType>
       <s:element name="Feedback">
@@ -3016,6 +3106,62 @@
           <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="PhoneBusiness" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCustomFields">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetCustomFieldsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCustomFieldsResult" type="tns:GetCustomFieldsResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetCustomFieldsResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LinkResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CustomFields" type="tns:ArrayOfCustomField" />
+              <s:element minOccurs="0" maxOccurs="1" name="CustomPresets" type="tns:ArrayOfCustomPreset" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomField" nillable="true" type="tns:CustomField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Index" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionNl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionFr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionEn" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LanguageDependent" nillable="true" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="UnitType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllowComment" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="HideLabel" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomPreset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomPreset" nillable="true" type="tns:CustomPreset" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomPreset">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomFieldCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Label" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionNl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionFr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DescriptionEn" type="s:string" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -3062,6 +3208,12 @@
   <wsdl:message name="GetLoginsSoapOut">
     <wsdl:part name="parameters" element="tns:GetLoginsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetCustomFieldsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCustomFields" />
+  </wsdl:message>
+  <wsdl:message name="GetCustomFieldsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCustomFieldsResponse" />
+  </wsdl:message>
   <wsdl:portType name="Skarabee_x0020_Web_x0020_LinkSoap">
     <wsdl:operation name="GetPublicationSummaries">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date.
@@ -3101,6 +3253,11 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all login info for every user that can publish to you.</wsdl:documentation>
       <wsdl:input message="tns:GetLoginsSoapIn" />
       <wsdl:output message="tns:GetLoginsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFields">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get all custom fields </wsdl:documentation>
+      <wsdl:input message="tns:GetCustomFieldsSoapIn" />
+      <wsdl:output message="tns:GetCustomFieldsSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="Skarabee_x0020_Web_x0020_LinkSoap" type="tns:Skarabee_x0020_Web_x0020_LinkSoap">
@@ -3161,6 +3318,15 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
     </wsdl:operation>
     <wsdl:operation name="GetLogins">
       <soap:operation soapAction="http://weblink.skarabee.com/GetLogins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomFields">
+      <soap:operation soapAction="http://weblink.skarabee.com/GetCustomFields" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3234,14 +3400,23 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCustomFields">
+      <soap12:operation soapAction="http://weblink.skarabee.com/GetCustomFields" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Skarabee_x0020_Web_x0020_Link">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice used to export Skarabee publications to a Skarabee Agents website.</wsdl:documentation>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap">
-      <soap:address location="http://weblink.skarabee.com/v38/weblink.asmx" />
+      <soap:address location="http://weblink.skarabee.com/v40/weblink.asmx" />
     </wsdl:port>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap12" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap12">
-      <soap12:address location="http://weblink.skarabee.com/v38/weblink.asmx" />
+      <soap12:address location="http://weblink.skarabee.com/v40/weblink.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
