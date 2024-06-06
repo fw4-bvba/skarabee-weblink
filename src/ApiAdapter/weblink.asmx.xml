@@ -470,6 +470,11 @@
           <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom3" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom4" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom5" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom6" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom7" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom8" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom9" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceBedroom10" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="LifeAnnuity" type="tns:LifeAnnuity" />
           <s:element minOccurs="0" maxOccurs="1" name="CollegialInfo" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="PartnerUrls" type="tns:ArrayOfPartnerUrl" />
@@ -526,6 +531,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="CustomValuesLanguageDependent" type="tns:ArrayOfCustomFiedValue" />
           <s:element minOccurs="1" maxOccurs="1" name="SurfaceGarage" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="RenovationDuty" type="tns:ThreeStateType" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProfessionalUnits" type="tns:ArrayOfProfessionalUnit" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Project">
@@ -1955,6 +1961,9 @@
           <s:enumeration value="ECR" />
           <s:enumeration value="PN" />
           <s:enumeration value="BLANK" />
+          <s:enumeration value="A_3PLUS" />
+          <s:enumeration value="A_4PLUS" />
+          <s:enumeration value="A_5PLUS" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="GasEmission">
@@ -2790,6 +2799,35 @@
           <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="ArrayOfProfessionalUnit">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProfessionalUnit" nillable="true" type="tns:ProfessionalUnit" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProfessionalUnit">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Floor" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalEntity" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableEntity" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinimalEntity" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceEntity" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceTotalAvailable" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="AvailableFrom" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AvailableFromDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DisplayOrder" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Created" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Modified" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="TypeDescriptionNl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TypeDescriptionFr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TypeDescriptionEn" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ArrayOfDocument">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
@@ -3216,7 +3254,7 @@
   </wsdl:message>
   <wsdl:portType name="Skarabee_x0020_Web_x0020_LinkSoap">
     <wsdl:operation name="GetPublicationSummaries">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date.
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date. 
                     lastModified not specified will return all active publications.
                     RequestedPropertyTypes (PropertyTypes) not specified will return all allowed types.
                     Please use RequestedPropertyTypes instead of PropertyTypes, PropertyTypes will be removed in future versions.</wsdl:documentation>
@@ -3244,7 +3282,7 @@
       <wsdl:output message="tns:GetContactInfoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetProjectSummaries">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get an overview of all active projects, when lastmodified is not supplied, or all active and modified projects, when lastmodified is supplied.
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get an overview of all active projects, when lastmodified is not supplied, or all active and modified projects, when lastmodified is supplied. 
 Projects/properties are nested like this: project&gt;models&gt;lots&gt;transactions. Only properties that are published will contain a ProjectPropertyPublication.</wsdl:documentation>
       <wsdl:input message="tns:GetProjectSummariesSoapIn" />
       <wsdl:output message="tns:GetProjectSummariesSoapOut" />
@@ -3413,10 +3451,10 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
   <wsdl:service name="Skarabee_x0020_Web_x0020_Link">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice used to export Skarabee publications to a Skarabee Agents website.</wsdl:documentation>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap">
-      <soap:address location="http://weblink.skarabee.com/v40/weblink.asmx" />
+      <soap:address location="http://weblink.skarabee.com/v41/weblink.asmx" />
     </wsdl:port>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap12" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap12">
-      <soap12:address location="http://weblink.skarabee.com/v40/weblink.asmx" />
+      <soap12:address location="http://weblink.skarabee.com/v41/weblink.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
