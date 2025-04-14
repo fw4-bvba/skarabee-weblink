@@ -532,6 +532,12 @@
           <s:element minOccurs="1" maxOccurs="1" name="SurfaceGarage" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="RenovationDuty" type="tns:ThreeStateType" />
           <s:element minOccurs="0" maxOccurs="1" name="ProfessionalUnits" type="tns:ArrayOfProfessionalUnit" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElectricityCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GazCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HeatingWaterCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HeatingCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommunalExpensesComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalInvestmentPrice" nillable="true" type="s:decimal" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Project">
@@ -1739,6 +1745,7 @@
           <s:enumeration value="Gvr" />
           <s:enumeration value="Wglk" />
           <s:enumeration value="OTHER" />
+          <s:enumeration value="Worg" />
         </s:restriction>
       </s:simpleType>
       <s:simpleType name="JudicialDecisionType">
@@ -2118,6 +2125,7 @@
           <s:enumeration value="BUY_PRICE" />
           <s:enumeration value="ON_REQUEST" />
           <s:enumeration value="NEGOTIABLE" />
+          <s:enumeration value="PRICE_FROM" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="OwnerInformation">
@@ -2939,7 +2947,6 @@
           <s:element minOccurs="0" maxOccurs="1" name="ExternalReference" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
@@ -2950,6 +2957,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="HouseNumber" nillable="true" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="HouseNumberExtension" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="OfficeId" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
@@ -3145,6 +3153,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="PhoneBusiness" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortraitUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetCustomFields">
@@ -3254,7 +3264,7 @@
   </wsdl:message>
   <wsdl:portType name="Skarabee_x0020_Web_x0020_LinkSoap">
     <wsdl:operation name="GetPublicationSummaries">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date. 
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date.
                     lastModified not specified will return all active publications.
                     RequestedPropertyTypes (PropertyTypes) not specified will return all allowed types.
                     Please use RequestedPropertyTypes instead of PropertyTypes, PropertyTypes will be removed in future versions.</wsdl:documentation>
@@ -3282,7 +3292,7 @@
       <wsdl:output message="tns:GetContactInfoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetProjectSummaries">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get an overview of all active projects, when lastmodified is not supplied, or all active and modified projects, when lastmodified is supplied. 
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get an overview of all active projects, when lastmodified is not supplied, or all active and modified projects, when lastmodified is supplied.
 Projects/properties are nested like this: project&gt;models&gt;lots&gt;transactions. Only properties that are published will contain a ProjectPropertyPublication.</wsdl:documentation>
       <wsdl:input message="tns:GetProjectSummariesSoapIn" />
       <wsdl:output message="tns:GetProjectSummariesSoapOut" />
@@ -3451,10 +3461,10 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
   <wsdl:service name="Skarabee_x0020_Web_x0020_Link">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice used to export Skarabee publications to a Skarabee Agents website.</wsdl:documentation>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap">
-      <soap:address location="http://weblink.skarabee.com/v41/weblink.asmx" />
+      <soap:address location="https://weblink.skarabee.com/v42/weblink.asmx" />
     </wsdl:port>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap12" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap12">
-      <soap12:address location="http://weblink.skarabee.com/v41/weblink.asmx" />
+      <soap12:address location="https://weblink.skarabee.com/v42/weblink.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
