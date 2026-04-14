@@ -1,7 +1,7 @@
 # Skarabee Weblink
 
 PHP client for the [Skarabee](https://www.skarabee.com) Weblink. For detailed information about the available endpoints
-and parameters, refer to the [official documentation](http://weblink.skarabee.com/v36/weblink.asmx).
+and parameters, refer to the [official documentation](http://weblink.skarabee.com/v46/weblink.asmx).
 
 ## Installation
 
