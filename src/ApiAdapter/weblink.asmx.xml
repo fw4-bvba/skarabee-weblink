@@ -415,6 +415,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="CostsTennantCertificate" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="CostsTennantDiverse" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="Deposit" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="DepositInMonths" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="MarketingTypes" type="tns:ArrayOfMarketingType" />
           <s:element minOccurs="1" maxOccurs="1" name="LotPublicationId" nillable="true" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Typo" type="tns:EstateTypo" />
@@ -532,6 +533,22 @@
           <s:element minOccurs="1" maxOccurs="1" name="SurfaceGarage" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="RenovationDuty" type="tns:ThreeStateType" />
           <s:element minOccurs="0" maxOccurs="1" name="ProfessionalUnits" type="tns:ArrayOfProfessionalUnit" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElectricityCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GazCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HeatingWaterCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HeatingCostsComment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CommunalExpensesComment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalInvestmentPrice" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ServiceCostsPerMonth" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="ServiceCostRecurrency" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="VveExpenses" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="VveExpensesRecurency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VveTypes" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceOtherUsageIndoor" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SurfaceBuildingRelatedOutdoor" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Accessibility" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OfficialBE" type="tns:OfficialBE" />
+          <s:element minOccurs="0" maxOccurs="1" name="OfficialNL" type="tns:OfficialNL" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="Project">
@@ -1711,6 +1728,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="JudicialDecision" type="tns:ThreeStateType" />
           <s:element minOccurs="0" maxOccurs="1" name="CommentOnJudicialDecision" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="ProtectedMonument" type="tns:ProtectedMonument" />
+          <s:element minOccurs="1" maxOccurs="1" name="MeasureRegister" nillable="true" type="s:boolean" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="AreaApp">
@@ -1739,6 +1757,7 @@
           <s:enumeration value="Gvr" />
           <s:enumeration value="Wglk" />
           <s:enumeration value="OTHER" />
+          <s:enumeration value="Worg" />
         </s:restriction>
       </s:simpleType>
       <s:simpleType name="JudicialDecisionType">
@@ -2118,6 +2137,7 @@
           <s:enumeration value="BUY_PRICE" />
           <s:enumeration value="ON_REQUEST" />
           <s:enumeration value="NEGOTIABLE" />
+          <s:enumeration value="PRICE_FROM" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="OwnerInformation">
@@ -2387,6 +2407,8 @@
           <s:enumeration value="Flat_Highrise" />
           <s:enumeration value="Flat_Porch" />
           <s:enumeration value="Flat_Condominium" />
+          <s:enumeration value="Flat_SemiDetached" />
+          <s:enumeration value="Flat_Detached" />
           <s:enumeration value="Flat_Villa" />
           <s:enumeration value="Flat_Townhouse" />
           <s:enumeration value="Flat_Haussmann" />
@@ -2403,13 +2425,21 @@
           <s:enumeration value="ServiceFlat_Villa" />
           <s:enumeration value="ServiceFlat_Townhouse" />
           <s:enumeration value="ServiceFlat_Haussmann" />
+          <s:enumeration value="ServiceFlat_Detached" />
+          <s:enumeration value="ServiceFlat_SemiDetached" />
+          <s:enumeration value="ServiceFlat_Terraced" />
           <s:enumeration value="Room_InComplex" />
           <s:enumeration value="Room_InDwelling" />
           <s:enumeration value="Room_InFlat" />
           <s:enumeration value="Room_Townhouse" />
+          <s:enumeration value="Room_Detached" />
+          <s:enumeration value="Room_SemiDetached" />
+          <s:enumeration value="Room_Terraced" />
           <s:enumeration value="Parking_Annex" />
           <s:enumeration value="Parking_Inbuilt" />
           <s:enumeration value="Parking_Detached" />
+          <s:enumeration value="Parking_SemiDetached" />
+          <s:enumeration value="Parking_Terraced" />
           <s:enumeration value="Other_Corner" />
           <s:enumeration value="Other_Detached" />
           <s:enumeration value="Other_Linked" />
@@ -2425,7 +2455,12 @@
           <s:enumeration value="Catering_InShoppingCenter" />
           <s:enumeration value="Office_InOfficeBuilding" />
           <s:enumeration value="Office_InShoppingCenter" />
+          <s:enumeration value="Office_Detached" />
+          <s:enumeration value="Office_SemiDetached" />
+          <s:enumeration value="Office_Terraced" />
           <s:enumeration value="Industry_Detached" />
+          <s:enumeration value="Industry_SemiDetached" />
+          <s:enumeration value="Industry_Terraced" />
           <s:enumeration value="Shop_Corner" />
           <s:enumeration value="Shop_Detached" />
           <s:enumeration value="Shop_Linked" />
@@ -2434,6 +2469,8 @@
           <s:enumeration value="Shop_Terraced" />
           <s:enumeration value="Shop_InShoppingCenter" />
           <s:enumeration value="ProfessionalOther_Detached" />
+          <s:enumeration value="ProfessionalOther_SemiDetached" />
+          <s:enumeration value="ProfessionalOther_Terraced" />
           <s:enumeration value="ProfessionalLand_Corner" />
           <s:enumeration value="ProfessionalLand_Detached" />
           <s:enumeration value="ProfessionalLand_Linked" />
@@ -2698,6 +2735,10 @@
           <s:enumeration value="PRIVATE" />
           <s:enumeration value="FREE" />
           <s:enumeration value="PERMIT_REQUIRED" />
+          <s:enumeration value="PUBLIC" />
+          <s:enumeration value="PAID" />
+          <s:enumeration value="PARKING_GARAGE" />
+          <s:enumeration value="FENCED_AREA" />
         </s:restriction>
       </s:simpleType>
       <s:complexType name="LifeAnnuity">
@@ -2828,6 +2869,83 @@
           <s:element minOccurs="0" maxOccurs="1" name="TypeDescriptionEn" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:complexType name="OfficialBE" />
+      <s:complexType name="OfficialNL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CadastrallInformations" type="tns:ArrayOfCadastrallInformationNL" />
+          <s:element minOccurs="1" maxOccurs="1" name="PermanentResidence" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="DoubleResidence" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="PartialRented" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsVATInclusive" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="WOZ" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="WOZDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Taxation" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaxationDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Clauses" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnergyCert" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnergyClass" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnergyIndex" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnergyEndDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Certifications" type="tns:ArrayOfEstateCertification" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionMeters" type="tns:ArrayOfTransactionMeter" />
+          <s:element minOccurs="0" maxOccurs="1" name="RightsInREM" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Elucidation" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ozbbusinessshare" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Waterboardlevies" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sewerrights" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Landconsolidation" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MonumentAct" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Protected" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Monument" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="BWInformationDuty" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOOTInformationDuty" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="GroundPolutionInformationDuty" nillable="true" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="AsbestosInformationDuty" nillable="true" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCadastrallInformationNL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CadastrallInformationNL" nillable="true" type="tns:CadastrallInformationNL" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CadastrallInformationNL">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Section" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Plot" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IndexNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Surface" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Range" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEstateCertification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EstateCertification" nillable="true" type="tns:EstateCertification" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EstateCertification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTransactionMeter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TransactionMeter" nillable="true" type="tns:TransactionMeter" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TransactionMeter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MeterNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Value" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="EanNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ArrayOfDocument">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
@@ -2939,7 +3057,6 @@
           <s:element minOccurs="0" maxOccurs="1" name="ExternalReference" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="CellPhone" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
@@ -2950,6 +3067,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="HouseNumber" nillable="true" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="HouseNumberExtension" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="OfficeId" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
@@ -3145,6 +3263,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="PhoneBusiness" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="PortraitUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetCustomFields">
@@ -3254,7 +3374,7 @@
   </wsdl:message>
   <wsdl:portType name="Skarabee_x0020_Web_x0020_LinkSoap">
     <wsdl:operation name="GetPublicationSummaries">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date. 
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get publication summaries for publications that where last created/modified after the given date.
                     lastModified not specified will return all active publications.
                     RequestedPropertyTypes (PropertyTypes) not specified will return all allowed types.
                     Please use RequestedPropertyTypes instead of PropertyTypes, PropertyTypes will be removed in future versions.</wsdl:documentation>
@@ -3282,7 +3402,7 @@
       <wsdl:output message="tns:GetContactInfoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetProjectSummaries">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get an overview of all active projects, when lastmodified is not supplied, or all active and modified projects, when lastmodified is supplied. 
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get an overview of all active projects, when lastmodified is not supplied, or all active and modified projects, when lastmodified is supplied.
 Projects/properties are nested like this: project&gt;models&gt;lots&gt;transactions. Only properties that are published will contain a ProjectPropertyPublication.</wsdl:documentation>
       <wsdl:input message="tns:GetProjectSummariesSoapIn" />
       <wsdl:output message="tns:GetProjectSummariesSoapOut" />
@@ -3451,10 +3571,10 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
   <wsdl:service name="Skarabee_x0020_Web_x0020_Link">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice used to export Skarabee publications to a Skarabee Agents website.</wsdl:documentation>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap">
-      <soap:address location="http://weblink.skarabee.com/v41/weblink.asmx" />
+      <soap:address location="https://weblink.skarabee.com/v46/weblink.asmx" />
     </wsdl:port>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap12" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap12">
-      <soap12:address location="http://weblink.skarabee.com/v41/weblink.asmx" />
+      <soap12:address location="https://weblink.skarabee.com/v46/weblink.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
