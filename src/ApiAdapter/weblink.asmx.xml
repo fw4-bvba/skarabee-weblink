@@ -206,6 +206,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="HasFurniture" type="tns:ThreeStateType" />
           <s:element minOccurs="1" maxOccurs="1" name="RoofType" type="tns:RoofType" />
           <s:element minOccurs="1" maxOccurs="1" name="WindowType" type="tns:WindowType" />
+          <s:element minOccurs="0" maxOccurs="1" name="WindowTypes" type="tns:ArrayOfWindowType" />
           <s:element minOccurs="0" maxOccurs="1" name="GlazingTypes" type="tns:ArrayOfGlazingType" />
           <s:element minOccurs="0" maxOccurs="1" name="HeatingTypes" type="tns:ArrayOfHeatingType" />
           <s:element minOccurs="1" maxOccurs="1" name="KitchenType" type="tns:KitchenType" />
@@ -1227,6 +1228,11 @@
           <s:enumeration value="OTHER" />
         </s:restriction>
       </s:simpleType>
+      <s:complexType name="ArrayOfWindowType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WindowType" type="tns:WindowType" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ArrayOfGlazingType">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="GlazingType" type="tns:GlazingType" />
@@ -3571,10 +3577,10 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
   <wsdl:service name="Skarabee_x0020_Web_x0020_Link">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice used to export Skarabee publications to a Skarabee Agents website.</wsdl:documentation>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap">
-      <soap:address location="https://weblink.skarabee.com/v46/weblink.asmx" />
+      <soap:address location="https://weblink.skarabee.com/v47/weblink.asmx" />
     </wsdl:port>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap12" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap12">
-      <soap12:address location="https://weblink.skarabee.com/v46/weblink.asmx" />
+      <soap12:address location="https://weblink.skarabee.com/v47/weblink.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
