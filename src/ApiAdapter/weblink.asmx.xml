@@ -146,6 +146,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Model" type="tns:Project" />
           <s:element minOccurs="0" maxOccurs="1" name="Created" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Modified" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusModifiedDate" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Active" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="Reference" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="MarketType" type="tns:EMarketType" />
@@ -155,6 +156,8 @@
           <s:element minOccurs="1" maxOccurs="1" name="FlowStatus" type="tns:TransactionFlowStatusType" />
           <s:element minOccurs="1" maxOccurs="1" name="Price" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="PriceType" type="tns:PriceType" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceVat6" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PriceVat21" nillable="true" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="Currency" type="tns:Currency" />
           <s:element minOccurs="1" maxOccurs="1" name="NumberOfBedrooms" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="HasGarage" type="tns:ThreeStateType" />
@@ -244,6 +247,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="GardenQuality" type="tns:GardenQualityType" />
           <s:element minOccurs="1" maxOccurs="1" name="LivingRoomType" type="tns:LivingRoomType" />
           <s:element minOccurs="1" maxOccurs="1" name="GarageType" type="tns:GarageType" />
+          <s:element minOccurs="0" maxOccurs="1" name="GarageTypes" type="tns:ArrayOfGarageType" />
           <s:element minOccurs="1" maxOccurs="1" name="ProfessionRoomType" type="tns:ProfessionRoomType" />
           <s:element minOccurs="1" maxOccurs="1" name="Condition" type="tns:ConditionType" />
           <s:element minOccurs="1" maxOccurs="1" name="IsVATInclusive" type="tns:ThreeStateType" />
@@ -405,6 +409,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="HasWashPlace" type="tns:ThreeStateType" />
           <s:element minOccurs="1" maxOccurs="1" name="HasBalcony" type="tns:ThreeStateType" />
           <s:element minOccurs="1" maxOccurs="1" name="RealEstateTax" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstateFloors" type="tns:ArrayOfFloorInfo" />
           <s:element minOccurs="0" maxOccurs="1" name="Link" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="AllFlashes" type="tns:ArrayOfFlash" />
           <s:element minOccurs="0" maxOccurs="1" name="MandateType" type="s:string" />
@@ -1222,6 +1227,8 @@
       <s:simpleType name="WindowType">
         <s:restriction base="s:string">
           <s:enumeration value="UNDEFINED" />
+          <s:enumeration value="HARDWOOD" />
+          <s:enumeration value="TILTTURN_WINDOW" />
           <s:enumeration value="PVC" />
           <s:enumeration value="WOOD" />
           <s:enumeration value="ALUMINIUM" />
@@ -1411,6 +1418,11 @@
           <s:enumeration value="GROUND_FLOOR" />
         </s:restriction>
       </s:simpleType>
+      <s:complexType name="ArrayOfGarageType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GarageType" type="tns:GarageType" />
+        </s:sequence>
+      </s:complexType>
       <s:simpleType name="ProfessionRoomType">
         <s:restriction base="s:string">
           <s:enumeration value="UNDEFINED" />
@@ -1838,6 +1850,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="MandateEnd" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="AgentContract" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="StartTransaction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SoldRentedDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Sold" type="s:string" />
         </s:sequence>
       </s:complexType>
@@ -2221,6 +2234,35 @@
           <s:enumeration value="UNDEFINED" />
         </s:restriction>
       </s:simpleType>
+      <s:complexType name="ArrayOfFloorInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FloorInfo" nillable="true" type="tns:FloorInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FloorInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="FloorNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Rooms" type="tns:ArrayOfRoomInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRoomInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RoomInfo" nillable="true" type="tns:RoomInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RoomInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Surface" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Length" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Height" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orientation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="ArrayOfMarketingType">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="MarketingType" nillable="true" type="tns:MarketingType" />
@@ -3577,10 +3619,10 @@ Projects/properties are nested like this: project&gt;models&gt;lots&gt;transacti
   <wsdl:service name="Skarabee_x0020_Web_x0020_Link">
     <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webservice used to export Skarabee publications to a Skarabee Agents website.</wsdl:documentation>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap">
-      <soap:address location="https://weblink.skarabee.com/v47/weblink.asmx" />
+      <soap:address location="https://weblink.skarabee.com/v50/weblink.asmx" />
     </wsdl:port>
     <wsdl:port name="Skarabee_x0020_Web_x0020_LinkSoap12" binding="tns:Skarabee_x0020_Web_x0020_LinkSoap12">
-      <soap12:address location="https://weblink.skarabee.com/v47/weblink.asmx" />
+      <soap12:address location="https://weblink.skarabee.com/v50/weblink.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
